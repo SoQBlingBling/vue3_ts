@@ -1,20 +1,35 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    name: 'home',
-    component: HomeView
+    redirect:"/login"
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  }
+    path: '/login',
+    name: 'login',
+    component: () => import('@/views/user/login.vue')
+  },
+  {
+    path: '/home',
+    name: 'home',
+    // beforeEnter(to, from, next) {
+    //   if (from.path === '/login') {
+    //     next()
+    //   } else {
+    //     next('/login')
+    //   }
+    // },
+    redirect:'/home/index',
+
+    component: () => import('@/views/home/home.vue'),
+    children:[
+      {
+        path:'index',
+        component:()=>import('@/views/home/components/index.vue'),
+      }
+    ]
+  },
 ]
 
 const router = createRouter({
@@ -22,4 +37,17 @@ const router = createRouter({
   routes
 })
 
+// router.beforeEach((to, from, next) => {
+//   if (to.path ==='/login') {
+//     next()
+//   }else{
+//     if (sessionStorage.getItem('userName')) {
+//       next()
+//     }else{
+//       next('/login')
+//     }
+//   }
+
+
+// })
 export default router
