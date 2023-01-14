@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkvue3_ts"]=self["webpackChunkvue3_ts"]||[]).push([[150],{2150:function(e,n,t){t.r(n),t.d(n,{default:function(){return i}});var u=t(3396);const r={class:"page"};function s(e,n){return(0,u.wg)(),(0,u.iD)("div",r,"不知道写什么了,如果有建议建议不建议")}var c=t(89);const a={},f=(0,c.Z)(a,[["render",s]]);var i=f}}]);
+//# sourceMappingURL=150.e6dc7109.js.map

@@ -13,13 +13,13 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/home',
     name: 'home',
-    // beforeEnter(to, from, next) {
-    //   if (from.path === '/login') {
-    //     next()
-    //   } else {
-    //     next('/login')
-    //   }
-    // },
+    beforeEnter(to, from, next) {
+      if (from.path === '/login') {
+        next()
+      } else {
+        next('/login')
+      }
+    },
     redirect:'/home/index',
 
     component: () => import('@/views/home/home.vue'),
@@ -27,6 +27,10 @@ const routes: Array<RouteRecordRaw> = [
       {
         path:'index',
         component:()=>import('@/views/home/components/index.vue'),
+      },
+      {
+        path:'other',
+        component:()=>import('@/views/home/components/other.vue'),
       }
     ]
   },
@@ -37,17 +41,18 @@ const router = createRouter({
   routes
 })
 
-// router.beforeEach((to, from, next) => {
-//   if (to.path ==='/login') {
-//     next()
-//   }else{
-//     if (sessionStorage.getItem('userName')) {
-//       next()
-//     }else{
-//       next('/login')
-//     }
-//   }
+router.beforeEach((to, from, next) => {
+  
+  if (to.path ==='/login') {
+    next()
+  }else{
+    if (sessionStorage.getItem('userName') && sessionStorage.getItem('userName')!='undefined') {
+      next()
+    }else{
+      next('/login')
+    }
+  }
 
 
-// })
+})
 export default router
